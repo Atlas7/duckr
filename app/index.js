@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import users from 'redux/modules/users'
 
 const store = createStore(users)
-console.log(store)
-console.log(store.getState())
+// console.log(store)
+// console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>
