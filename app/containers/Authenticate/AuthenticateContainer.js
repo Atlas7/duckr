@@ -10,10 +10,16 @@ const AuthenticateContainer = React.createClass({
     error: PropTypes.string.isRequired,
   },
   handleAuth () {
-    this.props.dispatch(userActionCreators.fetchingUser())
+    this.props.dispatch(
+      userActionCreators.fetchingUser()
+    )
     auth().then((user) => {
-      this.props.dispatch(userActionCreators.fetchingUserSuccess(user.uid, user, Date.now()))
-      this.props.dispatch(userActionCreators.authUser(user.id))
+      this.props.dispatch(
+        userActionCreators.fetchingUserSuccess(user.uid, user, Date.now())
+      )
+      this.props.dispatch(
+        userActionCreators.authUser(user.id)
+      )
       console.log('Authed User', user)
     }).catch((error) => this.props.dispatch(userActionCreators.fetchingUserFailure(error)))
   },
