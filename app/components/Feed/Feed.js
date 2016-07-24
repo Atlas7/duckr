@@ -1,12 +1,7 @@
 import React, { PropTypes } from 'react'
 
-const Feed = (props) => {
+export default function Feed (props) {
   return (
     <div>{'Feeeeed'}</div>
   )
 }
-
-Feed.PropTypes = {
-}
-
-export default Feed 

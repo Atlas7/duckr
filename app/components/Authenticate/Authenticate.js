@@ -14,7 +14,7 @@ const Authenticate = ({error, isFetching, onAuth}) => {
   )
 }
 
-Authenticate.PropTypes = {
+Authenticate.propTypes = {
   error: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
   onAuth: PropTypes.func.isRequired,

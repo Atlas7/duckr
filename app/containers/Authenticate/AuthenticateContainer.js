@@ -30,11 +30,11 @@ const AuthenticateContainer = React.createClass({
         error={this.props.error}
         onAuth={this.handleAuth}/>
     )
-  },
+  }
 })
 
 function mapStateToProps (state) {
-  // console.log(state)
+  console.log(state)
   return {
     isFetching: state.isFetching,
     error: state.error,
