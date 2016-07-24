@@ -1,6 +1,5 @@
 import React from 'react'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
-
 import {
   MainContainer,
   HomeContainer,
@@ -8,14 +7,14 @@ import {
   FeedContainer
 } from 'containers'
 
-const routes = (
-  <Router history={hashHistory}>
-    <Router path='/' component={MainContainer}>
-      <IndexRoute component={HomeContainer} />
-      <Route path='auth' component={AuthenticateContainer}/>
-      <Route path='feed' component={FeedContainer}/>
+export default function getRoutes (checkAuth) {
+  return (
+    <Router history={hashHistory}>
+      <Router path='/' component={MainContainer}>
+        <Route path='auth' component={AuthenticateContainer} onEnter={checkAuth} />
+        <Route path='feed' component={FeedContainer} onEnter={checkAuth} />
+        <IndexRoute component={HomeContainer} onEnter={checkAuth} />
+      </Router>
     </Router>
-  </Router>
-)
-
-export default routes
+  )
+}
