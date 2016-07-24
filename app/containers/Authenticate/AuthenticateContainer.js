@@ -10,8 +10,15 @@ const AuthenticateContainer = React.createClass({
     error: PropTypes.string.isRequired,
     fetchAndHandleAuthedUser: PropTypes.func.isRequired,
   },
-  handleAuth () {
+  contextTypes: {
+    router: PropTypes.object.isRequired,
+  },
+  handleAuth (event) {
+    event.preventDefault()
+    // console.log('event type', event.type)
+    // console.log('event object', event)
     this.props.fetchAndHandleAuthedUser()
+      .then(() => this.context.router.replace('feed'))
   },
   render () {
     // console.log(this.props)
@@ -27,7 +34,7 @@ const AuthenticateContainer = React.createClass({
 })
 
 function mapStateToProps (state) {
-  console.log(state)
+  // console.log(state)
   return {
     isFetching: state.isFetching,
     error: state.error,
