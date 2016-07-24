@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
+import { text } from './styles.css'
 
 const Logout = (props) => {
   return (
-    <div>{'Logouuuuuut'}</div>
+    <div className={text}>{'Logouuuuuut'}</div>
   )
 }
 
