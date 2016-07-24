@@ -9,7 +9,7 @@ const FacebookAuthButton = ({onAuth, isFetching}) => {
   )
 }
 
-FacebookAuthButton.PropTypes = {
+FacebookAuthButton.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   onAuth: PropTypes.func.isRequired,
 }
