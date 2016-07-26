@@ -6,6 +6,7 @@ const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE'
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS'
+const REMOVE_FETCHING_USER = 'REMOVE_FETCHING_USER'
 
 export function authUser (uid) {
   return {
@@ -51,9 +52,9 @@ export function fetchAndHandleAuthedUser () {
       const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
       return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()))
     })
-      .then(({user}) => saveUser(user))
-      .then((user) => dispatch(authUser(user.uid)))
-      .catch((error) => dispatch(fetchingUserFailure(error)))
+    .then(({user}) => saveUser(user))
+    .then((user) => dispatch(authUser(user.uid)))
+    .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
 
@@ -61,6 +62,12 @@ export function logoutAndUnauth () {
   return (dispatch) => {
     logout()
     dispatch(unauthUser())
+  }
+}
+
+export function removeFetchingUser () {
+  return {
+    type: REMOVE_FETCHING_USER
   }
 }
 
@@ -118,19 +125,24 @@ export default function users (state = initialState, action) {
         isFetching: false,
         error: action.error,
       }
+    case REMOVE_FETCHING_USER:
+      return {
+        ...state,
+        isFetching: false,
+      }
     case FETCHING_USER_SUCCESS:
       return action.user === null
         ? {
-        ...state,
-        isFetching: false,
-        error: '',
-      }
+          ...state,
+          isFetching: false,
+          error: '',
+        }
         : {
-        ...state,
-        isFetching: false,
-        error: '',
-        [action.uid]: user(state[action.uid], action),
-      }
+          ...state,
+          isFetching: false,
+          error: '',
+          [action.uid]: user(state[action.uid], action),
+        }
     default :
       return state
   }

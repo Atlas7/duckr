@@ -1,18 +1,19 @@
 import React, { PropTypes } from 'react'
-import { Navigation } from 'components'
 import { connect } from 'react-redux'
+import { Navigation } from 'components'
+import { container, innerContainer } from './styles.css'
 import { bindActionCreators } from 'redux'
 import * as userActionCreators from 'redux/modules/users'
 import { formatUserInfo } from 'helpers/utils'
 import { firebaseAuth } from 'config/constants'
-import { container, innerContainer } from './styles.css'
 
 const MainContainer = React.createClass({
   propTypes: {
-    isAuthed: PropTypes.bool.isRequired,    // state
+    isAuthed: PropTypes.bool.isRequired,  // state
     isFetching: PropTypes.bool.isRequired,  // state
-    authUser: PropTypes.func.isRequired,    // dispatch
-    fetchingUserSuccess: PropTypes.func.isRequired,    // dispatch
+    authUser: PropTypes.func.isRequired,  // dispatch
+    fetchingUserSuccess: PropTypes.func.isRequired,  // dispatch
+    removeFetchingUser: PropTypes.func.isRequired,  // dispatch
   },
   contextTypes: {
     router: PropTypes.object.isRequired,
@@ -27,6 +28,8 @@ const MainContainer = React.createClass({
         if (this.props.location.pathname === '/') {
           this.context.router.replace('feed')
         }
+      } else {
+         this.props.removeFetchingUser()
       }
     })
   },
