@@ -43,16 +43,15 @@ function fetchingUserSuccess (uid, user, timestamp) {
 }
 
 export function fetchAndHandleAuthedUser () {
-  return (dispatch) => {
-    // console.log('fetchingUser')
+  return function (dispatch) {
     dispatch(fetchingUser())
-    return auth().then((user) => {
-      // console.log('Authed User', user)
-      // console.log('fetchingUserSuccess')
-      dispatch(fetchingUserSuccess(user.uid, user, Date.now()))
-      // console.log('authUser')
-      dispatch(authUser(user.uid))
-    }).catch((error) => dispatch(fetchingUserFailure(error)))
+    return auth().then(({user, credential}) => {
+      console.log('user', user)
+      return dispatch(fetchingUserSuccess(user.uid, user, Date.now()))
+    })
+      // .then(({user}) => saveUser(user))
+      .then((user) => dispatch(authUser(user.uid)))
+      .catch((error) => dispatch(fetchingUserFailure(error)))
   }
 }
 
