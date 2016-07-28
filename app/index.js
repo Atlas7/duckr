@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { checkIfAuthed } from 'helpers/auth'
-import users from 'redux/modules/users'
 import * as reducers from 'redux/modules'
 
 const store = createStore(combineReducers(reducers), compose(
