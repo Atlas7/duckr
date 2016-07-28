@@ -34,7 +34,7 @@ const AuthenticateContainer = React.createClass({
 })
 
 function mapStateToProps (state) {
-  console.log(state)
+  // console.log(state)
   return {
     isFetching: state.isFetching,
     error: state.error,
