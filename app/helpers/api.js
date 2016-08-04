@@ -37,5 +37,5 @@ export function listenToFeed (cb, errorCB) {
       return feed[b].timestamp - feed[a].timestamp
     })
     cb({feed, sortedIds})
-  }, erroCB)
+  }, errorCB)
 }
