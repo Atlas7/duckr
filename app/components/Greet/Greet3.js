@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Greet1 = function ({message}) {
+function Greet3 ({message}) {
   return (
     <div>
       <p>{message}</p>
@@ -8,8 +8,8 @@ const Greet1 = function ({message}) {
   )
 }
 
-Greet1.propTypes = {
+Greet3.propTypes = {
   message: PropTypes.string.isRequired,
 }
 
-export default Greet1
+export default Greet3
