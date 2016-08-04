@@ -55,9 +55,9 @@ export function setAndHandleFeedListener () {
 
     listenToFeed(({feed, sortedIds}) => {
       dispatch(addMultipleDucks(feed))
-      initialFetch === true ?
-        dispatch(settingFeedListenerSuccess(sortedIds)) :
-        dispatch(addNewDuckIdToFeed(sortedIds[0]))
+      initialFetch === true
+        ? dispatch(settingFeedListenerSuccess(sortedIds))
+        : dispatch(addNewDuckIdToFeed(sortedIds[0]))
     }, (error) => dispatch(settingFeedListenerError()))
   }
 }
