@@ -58,12 +58,12 @@ export function deleteFromUsersLikes (uid, duckId) {
 }
 
 export function incrementNumberOfLikes (duckId) {
-  return ref.child(`usersLikes/${uid}`)
+  return ref.child(`likeCount/${duckId}`)
     .transaction((currentValue = 0) => currentValue + 1)
 
 }
 
 export function decrementNumberOfLikes (duckId) {
-  return ref.child(`usersLikes/${uid}`)
+  return ref.child(`likeCount/${duckId}`)
     .transaction((currentValue = 0) => currentValue - 1)
 }

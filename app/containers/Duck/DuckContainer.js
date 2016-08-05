@@ -31,7 +31,7 @@ const DuckContainer = React.createClass({
     e.stopPropagation()
     this.context.router.push(`/${this.props.duck.uid}`)
   },
-  handleClick () {
+  handleClick (e) {
     e.stopPropagation()
     this.context.router.push(`/duckDetail/${this.props.duck.duckId}`)
   },
@@ -39,7 +39,7 @@ const DuckContainer = React.createClass({
     return (
       <Duck
         goToProfile={this.goToProfile}
-        onCLick={this.props.hideReplyBtn === true ? null : this.handleClick}
+        onClick={this.props.hideReplyBtn === true ? null : this.handleClick}
         {...this.props}
       />
     )
