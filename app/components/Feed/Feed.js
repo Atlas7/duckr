@@ -32,10 +32,7 @@ export default function Feed (props) {
       ? <p className={header}>{'This is unfortunate.'} <br /> {'It appears there are no ducks yet 😞'}</p>
       : null}
     {props.duckIds.map((id) => (
-      <div>
-        <p key={id}>{`DuckId: ${id}`}</p>
-        <DuckContainer duckId={id} key={id} />
-      </div>
+      <p key={id}>{`DuckId: ${id}`}</p>
     ))}
     {props.error ? <p className={errorMsg}>{props.error}</p> : null}
   </div>
