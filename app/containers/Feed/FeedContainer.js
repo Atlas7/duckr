@@ -11,6 +11,7 @@ const FeedContainer = React.createClass({
     newDucksAvailable: PropTypes.bool.isRequired,
     setAndHandleFeedListener: PropTypes.func.isRequired,
     resetNewDucksAvailable: PropTypes.func.isRequired,
+    duckIds: PropTypes.array.isRequired,
   },
   componentDidMount () {
     // set a listener to ducks
@@ -23,17 +24,19 @@ const FeedContainer = React.createClass({
         isFetching={this.props.isFetching}
         newDucksAvailable={this.props.newDucksAvailable}
         resetNewDucksAvailable={this.props.resetNewDucksAvailable}
+        duckIds={this.props.duckIds}
       />
     )
   }
 })
 
 function mapStateToProps ({feed}) {
-  const { newDucksAvailable, error, isFetching  } = feed
+  const { newDucksAvailable, error, isFetching, duckIds  } = feed
   return {
     newDucksAvailable,
     error,
     isFetching,
+    duckIds,
   }
 }
 

@@ -14,11 +14,11 @@ function user (state = initialUserState, action) {
       return {
         ...state,
         info: action.user,
-      lastUpdated: action.timestamp,
+        lastUpdated: action.timestamp,
+      }
+    default :
+      return state
   }
-default :
-  return state
-}
 }
 
 const initialState = {
@@ -34,41 +34,41 @@ export default function users (state = initialState, action) {
       return {
         ...state,
         isAuthed: true,
-      authedId: action.uid,
+        authedId: action.uid,
+      }
+    case UNAUTH_USER :
+      return {
+        ...state,
+        isAuthed: false,
+        authedId: '',
+      }
+    case FETCHING_USER:
+      return {
+        ...state,
+        isFetching: true,
+      }
+    case FETCHING_USER_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case FETCHING_USER_SUCCESS:
+      return action.user === null
+        ? {
+        ...state,
+        isFetching: false,
+        error: '',
+      }
+        : {
+        ...state,
+        isFetching: false,
+        error: '',
+        [action.uid]: user(state[action.uid], action),
+      }
+    default :
+      return state
   }
-  case UNAUTH_USER :
-    return {
-      ...state,
-      isAuthed: false,
-    authedId: '',
-}
-  case FETCHING_USER:
-    return {
-      ...state,
-      isFetching: true,
-}
-  case FETCHING_USER_FAILURE:
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case FETCHING_USER_SUCCESS:
-    return action.user === null
-      ? {
-      ...state,
-      isFetching: false,
-    error: '',
-}
-  : {
-  ...state,
-      isFetching: false,
-      error: '',
-      [action.uid]: user(state[action.uid], action),
-  }
-  default :
-  return state
-}
 }
 
 
@@ -84,35 +84,35 @@ export default function ducks (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-  }
-  case ADD_DUCK :
+      }
+    case ADD_DUCK :
     case FETCHING_DUCK_SUCCESS :
-    return {
-      ...state,
-      error: '',
-    isFetching: false,
-    [action.duck.duckId]: action.duck,
-}
-  case FETCHING_DUCK_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case REMOVE_FETCHING :
-    return {
-      ...state,
-      error: '',
-    isFetching: false,
-}
-  case ADD_MULTIPLE_DUCKS :
-    return {
-      ...state,
-  ...action.ducks,
-}
-  default :
-  return state
-}
+      return {
+        ...state,
+        error: '',
+        isFetching: false,
+        [action.duck.duckId]: action.duck,
+      }
+    case FETCHING_DUCK_ERROR :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case REMOVE_FETCHING :
+      return {
+        ...state,
+        error: '',
+        isFetching: false,
+      }
+    case ADD_MULTIPLE_DUCKS :
+      return {
+        ...state,
+        ...action.ducks,
+      }
+    default :
+      return state
+  }
 }
 
 
@@ -131,37 +131,37 @@ export default function feed (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
+      }
+    case SETTING_FEED_LISTENER_ERROR :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case SETTING_FEED_LISTENER_SUCCESS :
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        duckIds: action.duckIds,
+        newDucksAvailable: false,
+      }
+    case ADD_NEW_DUCK_ID_TO_FEED :
+      return {
+        ...state,
+        newDucksToAdd: [action.duckId, ...state.newDucksToAdd],
+        newDucksAvailable: true,
+      }
+    case RESET_NEW_DUCKS_AVAILABLE :
+      return {
+        ...state,
+        duckIds: [...state.newDucksToAdd, ...state.duckIds],
+        newDucksToAdd: [],
+        newDucksAvailable: false,
+      }
+    default :
+      return state
   }
-  case SETTING_FEED_LISTENER_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case SETTING_FEED_LISTENER_SUCCESS :
-    return {
-      ...state,
-      isFetching: false,
-    error: '',
-    duckIds: action.duckIds,
-    newDucksAvailable: false,
-}
-  case ADD_NEW_DUCK_ID_TO_FEED :
-    return {
-      ...state,
-      newDucksToAdd: [action.duckId, ...state.newDucksToAdd],
-  newDucksAvailable: true,
-}
-  case RESET_NEW_DUCKS_AVAILABLE :
-    return {
-      ...state,
-      duckIds: [...state.newDucksToAdd, ...state.duckIds],
-  newDucksToAdd: [],
-    newDucksAvailable: false,
-}
-  default :
-  return state
-}
 }
 
 
@@ -172,10 +172,10 @@ export default function listeners (state = {}, action) {
       return {
         ...state,
         [action.listenerId]: true,
+      }
+    default :
+      return state
   }
-  default :
-  return state
-}
 }
 
 
@@ -191,20 +191,20 @@ export default function modal (state = initialState, action) {
       return {
         ...state,
         isOpen: true,
+      }
+    case CLOSE_MODAL :
+      return {
+        duckText: '',
+        isOpen: false,
+      }
+    case UPDATE_DUCK_TEXT :
+      return {
+        ...state,
+        duckText: action.newDuckText,
+      }
+    default :
+      return state
   }
-  case CLOSE_MODAL :
-    return {
-      duckText: '',
-      isOpen: false,
-    }
-  case UPDATE_DUCK_TEXT :
-    return {
-      ...state,
-      duckText: action.newDuckText,
-}
-  default :
-  return state
-}
 }
 
 
@@ -224,15 +224,15 @@ function duckReplies (state = initialReply, action) {
       return {
         ...state,
         [action.reply.replyId]: action.reply,
+      }
+    case REMOVE_REPLY :
+      return {
+        ...state,
+        [action.reply.replyId]: undefined,
+      }
+    default :
+      return state
   }
-case REMOVE_REPLY :
-    return {
-      ...state,
-      [action.reply.replyId]: undefined,
-}
-default :
-  return state
-}
 }
 
 const initialDuckState = {
@@ -246,17 +246,17 @@ function repliesAndLastUpated (state = initialDuckState, action) {
       return {
         ...state,
         lastUpdated: action.lastUpdated,
-      replies: action.replies,
-  }
-case ADD_REPLY :
+        replies: action.replies,
+      }
+    case ADD_REPLY :
     case REMOVE_REPLY :
-    return {
-      ...state,
-      replies: duckReplies(state.replies, action),
-}
-default :
-  return state
-}
+      return {
+        ...state,
+        replies: duckReplies(state.replies, action),
+      }
+    default :
+      return state
+  }
 }
 
 const initialState = {
@@ -270,26 +270,26 @@ export default function replies (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-  }
-  case FETCHING_REPLIES_ERROR :
+      }
+    case FETCHING_REPLIES_ERROR :
     case ADD_REPLY_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case ADD_REPLY :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case ADD_REPLY :
     case FETCHING_REPLIES_SUCCESS :
     case REMOVE_REPLY :
-    return {
-      ...state,
-      isFetching: false,
-    error: '',
-    [action.duckId]: repliesAndLastUpated(state[action.duckId], action),
-}
-  default :
-  return state
-}
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        [action.duckId]: repliesAndLastUpated(state[action.duckId], action),
+      }
+    default :
+      return state
+  }
 }
 
 
@@ -316,30 +316,30 @@ export default function likeCount (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-  }
-  case FETCHING_COUNT_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case FETCHING_COUNT_SUCCESS :
-    return {
-      ...state,
-  ...initialState,
-    [action.duckId]: action.count,
-}
-  case ADD_LIKE :
+      }
+    case FETCHING_COUNT_ERROR :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case FETCHING_COUNT_SUCCESS :
+      return {
+        ...state,
+        ...initialState,
+        [action.duckId]: action.count,
+      }
+    case ADD_LIKE :
     case REMOVE_LIKE :
-    return typeof state[action.duckId] === 'undefined'
-      ? state
-      : {
-      ...state,
-      [action.duckId]: count(state[action.duckId], action),
-}
-  default :
-  return state
-}
+      return typeof state[action.duckId] === 'undefined'
+        ? state
+        : {
+        ...state,
+        [action.duckId]: count(state[action.duckId], action),
+      }
+    default :
+      return state
+  }
 }
 
 
@@ -355,10 +355,10 @@ function usersDuck (state = initialUsersDuckState, action) {
       return {
         ...state,
         duckIds: state.duckIds.concat([action.duckId]),
+      }
+    default :
+      return state
   }
-default :
-  return state
-}
 }
 
 const initialState = {
@@ -372,35 +372,35 @@ export default function usersDucks (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
+      }
+    case FETCHING_USERS_DUCKS_ERROR :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case FETCHING_USERS_DUCKS_SUCCESS :
+      return {
+        ...state,
+        isFetching: false,
+        error: '',
+        [action.uid]: {
+          lastUpdated: action.lastUpdated,
+          duckIds: action.duckIds,
+        },
+      }
+    case ADD_SINGLE_USERS_DUCK :
+      return typeof state[action.uid] === 'undefined'
+        ? state
+        : {
+        ...state,
+        isFetching: false,
+        error: '',
+        [action.uid]: usersDuck(state[action.uid], action),
+      }
+    default :
+      return state
   }
-  case FETCHING_USERS_DUCKS_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case FETCHING_USERS_DUCKS_SUCCESS :
-    return {
-      ...state,
-      isFetching: false,
-    error: '',
-    [action.uid]: {
-    lastUpdated: action.lastUpdated,
-      duckIds: action.duckIds,
-  },
-}
-  case ADD_SINGLE_USERS_DUCK :
-    return typeof state[action.uid] === 'undefined'
-      ? state
-      : {
-      ...state,
-      isFetching: false,
-    error: '',
-    [action.uid]: usersDuck(state[action.uid], action),
-}
-  default :
-  return state
-}
 }
 
 
@@ -417,33 +417,33 @@ export default function usersLikes (state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-  }
-  case FETCHING_LIKES_ERROR :
-    return {
-      ...state,
-      isFetching: false,
-    error: action.error,
-}
-  case FETCHING_LIKES_SUCCESS :
-    return {
-      ...state,
-  ...action.likes,
-    isFetching: false,
-    error: '',
-}
-  case ADD_LIKE :
-    return {
-      ...state,
-      [action.duckId]: true,
-}
-  case REMOVE_LIKE :
-    return Object.keys(state)
+      }
+    case FETCHING_LIKES_ERROR :
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      }
+    case FETCHING_LIKES_SUCCESS :
+      return {
+        ...state,
+        ...action.likes,
+        isFetching: false,
+        error: '',
+      }
+    case ADD_LIKE :
+      return {
+        ...state,
+        [action.duckId]: true,
+      }
+    case REMOVE_LIKE :
+      return Object.keys(state)
         .filter((duckId) => action.duckId !== duckId)
-  .reduce((prev, current) => {
-    prev[current] = state[current]
-    return prev
-  }, {})
-  default :
-  return state
-}
+        .reduce((prev, current) => {
+          prev[current] = state[current]
+          return prev
+        }, {})
+    default :
+      return state
+  }
 }
