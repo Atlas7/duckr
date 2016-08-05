@@ -1,78 +1,73 @@
-// Auth user only
-
 {
   users: {
     isAuthed,
-    isFetching,
-    error,
-    authedId,
-    [uid]: {
+      isFetching,
+      error,
+      authedId,
+      [uid]: {
       lastUpdated,
-      info: {
+        info: {
         name,
-        uid,
-        avatar
+          uid,
+          avatar,
       }
     }
   },
   modal: {
     duck,
-    isOpen
+      isOpen
   },
   ducks: {
-    isFetching,
-    error,
     [duckId]: {
       lastUpdated,
-      info: {
+        info: {
         avatar,
-        duckId,
-        name,
-        text,
-        timestamp,
-        uid
+          duckId,
+          name,
+          text,
+          timestamp,
+          uid,
       }
-    }
-  },
-  usersDucks: {
-    isFetching,
-    error,
-    [uid]: {
-      lastUpdated,
-      duckIds: [duckId]
     }
   },
   likeCount: {
     [duckId]: 0
   },
-  usersLikes: {
-    [duckId]: true
+  usersDucks: {
+    isFetching,
+      error,
+      [uid]: {
+      lastUpdated,
+        duckIds: [duckId, duckId, duckId]
+    }
   },
+  usersLikes: {
+    duckid: true,
+  }
+  feed: {
+    isFetching,
+      error,
+      newDucksAvailable,
+      duckIdsToAdd: [duckId, duckId],
+      duckIds: [duckid, duckId, duckId]
+  }
   replies: {
     isFetching,
-    error,
-    [duckId]: {
+      error,
+      [duckId]: {
       lastUpdated,
-      replies: {
+        replies: {
         [replyId]: {
-          name
-          comment
-          uid
-          timestamp
-          avatar
+          name,
+            reply,
+            uid,
+            timestamp,
+            avatar
         }
       }
     }
   },
-  listener: {
-    [listenersId]: true
-  },
-  feed: {
-    isFetching,
-    error,
-    newDucksAvailable,
-    duckIdsToAdd: [duckId],
-    duckIds: [duckId]
+  listeners: {
+    [listenerId]: true
   }
 }
-
