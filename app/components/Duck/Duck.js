@@ -53,7 +53,7 @@ export default function Duck (props) {
         <div className={likeReplyContainer}>
           {props.hideReplyBtn === true
             ? null
-            : <Reply className={icon} />}
+            : <Reply className={icon} onClick={props.goToProfile} />}
           <div className={actionContainer}>
             <Star className={starIcon} onClick={(e) => starFn(props.duck.duckId, e)} />
             {props.hideLikeCount === true ? null : <div>{props.numberOfLikes}</div>}
