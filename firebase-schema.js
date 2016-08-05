@@ -1,11 +1,11 @@
 /users
-  uid
+  [uid]
     name
     uid
     avatar
 
 /notifications
-  uid
+  [uid]
     notificationId
       type
       author
@@ -15,7 +15,7 @@
       timestamp
 
 /ducks
-  duckId
+  [duckId]
     avatar
     duckId
     name
@@ -24,12 +24,12 @@
     uid (of duck author)
 
 /likeCount
-  duckId
+  [duckId]
     0
 
 /usersDucks
-  uid
-    duckId
+  [uid[]
+    [duckId]
       avatar
       duckId
       name
@@ -38,8 +38,8 @@
       uid (of duck author)
 
 /replies
-  duckId
-    replyId
+  [duckId]
+    [replyId]
       name
       comment
       uid
@@ -47,5 +47,5 @@
       avatar
 
 /usersLikes
-  uid
-    duckId: true
+  [uid]
+    [duckId]: true

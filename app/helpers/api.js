@@ -39,3 +39,31 @@ export function listenToFeed (cb, errorCB) {
     cb({feed, sortedIds})
   }, errorCB)
 }
+
+export function fetchUsersLikes (uid) {
+  return ref.child(`usersLikes/${uid}`)
+    .once('value')
+    .then((snapshot) => snapshot.val() || {})
+}
+
+export function saveToUsersLikes (uid, duckId) {
+  return ref.child(`usersLikes/${uid}/${duckId}`)
+    .set(true)
+}
+
+// set value to null will delete the observation from Firebase
+export function deleteFromUsersLikes (uid, duckId) {
+  return ref.child(`usersLikes/${uid}/${duckId}`)
+    .set(null)
+}
+
+export function incrementNumberOfLikes (duckId) {
+  return ref.child(`usersLikes/${uid}`)
+    .transaction((currentValue = 0) => currentValue + 1)
+
+}
+
+export function decrementNumberOfLikes (duckId) {
+  return ref.child(`usersLikes/${uid}`)
+    .transaction((currentValue = 0) => currentValue - 1)
+}
