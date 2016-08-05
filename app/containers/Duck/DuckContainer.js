@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Duck } from 'components'
+import * as usersLikesActionCreators from 'redux/modules/usersLikes'
 
 const { func, object, bool, number, string } = PropTypes
 
@@ -54,6 +56,11 @@ function mapStateToProps ({ducks, likeCount, usersLikes}, props) {
   }
 }
 
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators(usersLikesActionCreators, dispatch)
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DuckContainer)
