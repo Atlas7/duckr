@@ -13,7 +13,7 @@ function mapStateToProps ({modal, users}, props) {
     isSubmitDisabled: duckTextLength <= 0 || duckTextLength > 140,
   }
 }
-function mapDispatchToProps (dispatch, props) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators(
     {...modalActionCreators, ...ducksActionCreators},
     dispatch

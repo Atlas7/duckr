@@ -16,8 +16,6 @@ function checkAuth (nextState, replace) {
   if (store.getState().users.isFetching === true) {
     return
   }
-
-  // console.log(arguments)
   const isAuthed = checkIfAuthed(store)
   const nextPathName = nextState.location.pathname
   if (nextPathName === '/' || nextPathName === '/auth') {

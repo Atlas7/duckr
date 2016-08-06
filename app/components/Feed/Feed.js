@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { newDuckContainer, header } from './styles.css'
-import { errorMsg } from 'sharedStyles/styles.css'
 import { DuckContainer } from 'containers'
+import { errorMsg } from 'sharedStyles/styles.css'
 
 NewDucksAvailable.propTypes = {
   handleClick: PropTypes.func.isRequired,

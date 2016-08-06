@@ -3,20 +3,22 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import {
   MainContainer,
   HomeContainer,
+  GreetContainer,
   AuthenticateContainer,
   FeedContainer,
   LogoutContainer,
-  GreetContainer
+  UserContainer
 } from 'containers'
 
 export default function getRoutes (checkAuth) {
   return (
     <Router history={hashHistory}>
       <Router path='/' component={MainContainer}>
+        <Route path='greet' component={GreetContainer} />
         <Route path='auth' component={AuthenticateContainer} onEnter={checkAuth} />
         <Route path='feed' component={FeedContainer} onEnter={checkAuth} />
         <Route path='logout' component={LogoutContainer} />
-        <Route path='greet' component={GreetContainer} />
+        <Route path='/:uid' component={UserContainer} />
         <IndexRoute component={HomeContainer} onEnter={checkAuth} />
       </Router>
     </Router>
