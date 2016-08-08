@@ -14,8 +14,10 @@ const DuckDetailsContainer = React.createClass({
     duckAlreadyFetched: PropTypes.bool.isRequired,
     removeFetching: PropTypes.func.isRequired,
     fetchAndHandleDuck: PropTypes.func.isRequired,
+    initLikeFetch: PropTypes.func.isRequired,
   },
   componentDidMount () {
+    this.props.initLikeFetch(this.props.duckId)
     if (this.props.duckAlreadyFetched === false) {
       this.props.fetchAndHandleDuck(this.props.duckId)
     } else {
@@ -45,7 +47,10 @@ function mapStateToProps ({users, ducks, likeCount}, props) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(ducksActionCreator , dispatch)
+  return bindActionCreators({
+    ...ducksActionCreator,
+    ...likeCountActionCreator
+  }, dispatch)
 }
 
 export default connect(
