@@ -1,4 +1,4 @@
-// Redux schema (mind map)
+// Redux schema (mind map) - - this is not really a code. More like a sketch to demo the data structure.
 //
 // - 1st level properties are defined by the reducer files stored in app/redux/modules
 //   e.g. users is defined by the users.js reducer file

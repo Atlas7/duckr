@@ -1,4 +1,4 @@
-// Firebase schema (mind map)
+// Firebase schema (mind map) - this is not really a code. More like a sketch to demo the data structure.
 //
 // - 1st level properties corresponds to the Firebase root end-points
 //   e.g. users corresponds to the root end-point /users on Firebase.
@@ -73,7 +73,7 @@ let firebaseSchema = {
     [duckId]: {
       [replyId]: {
         name,
-        comment,
+        reply,
         uid,
         timestamp,
         avatar,
