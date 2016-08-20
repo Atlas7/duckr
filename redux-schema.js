@@ -1,73 +1,101 @@
-{
+// Redux schema (mind map)
+//
+// - 1st level properties are defined by the reducer files stored in app/redux/modules
+//   e.g. users is defined by the users.js reducer file
+//   e.g. modal is defined by the modal.js reducer file
+//
+// - 2nd level (and further down) are sub properties of the 1st level object.
+//   (Use the Google Chrome Redux extension to visualise the redux schema at each state).
+
+let reduxSchema = {
+
+  //users
   users: {
     isAuthed,
-      isFetching,
-      error,
-      authedId,
-      [uid]: {
+    isFetching,
+    error,
+    authedId,
+    [uid]: {
       lastUpdated,
-        info: {
+      info: {
         name,
-          uid,
-          avatar,
+        uid,
+        avatar,
       }
     }
   },
+
+  //modal
   modal: {
     duck,
-      isOpen
+    isOpen,
   },
+
+  //ducks
   ducks: {
     [duckId]: {
       lastUpdated,
-        info: {
+      info: {
         avatar,
-          duckId,
-          name,
-          text,
-          timestamp,
-          uid,
+        duckId,
+        name,
+        text,
+        timestamp,
+        uid,
       }
     }
   },
+
+  //likeCount
   likeCount: {
     [duckId]: 0
   },
+
+  //usersDucks
   usersDucks: {
     isFetching,
-      error,
-      [uid]: {
+    error,
+    [uid]: {
       lastUpdated,
-        duckIds: [duckId, duckId, duckId]
+      duckIds: [duckId, duckId, duckId]
     }
   },
+
+  //usersLikes
   usersLikes: {
     duckid: true,
-  }
+  },
+
+  //feed
   feed: {
     isFetching,
-      error,
-      newDucksAvailable,
-      duckIdsToAdd: [duckId, duckId],
-      duckIds: [duckid, duckId, duckId]
-  }
+    error,
+    newDucksAvailable,
+    duckIdsToAdd: [duckId, duckId],
+    duckIds: [duckid, duckId, duckId]
+  },
+
+  //replies
   replies: {
     isFetching,
-      error,
-      [duckId]: {
+    error,
+    [duckId]: {
       lastUpdated,
-        replies: {
+      replies: {
         [replyId]: {
           name,
-            reply,
-            uid,
-            timestamp,
-            avatar
+          reply,
+          uid,
+          timestamp,
+          avatar
         }
       }
     }
   },
+
+  //listeners
   listeners: {
     [listenerId]: true
   }
+
 }
