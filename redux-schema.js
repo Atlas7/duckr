@@ -1,15 +1,15 @@
 {
   users: {
     isAuthed,
-      isFetching,
-      error,
-      authedId,
-      [uid]: {
+    isFetching,
+    error,
+    authedId,
+    [uid]: {
       lastUpdated,
-        info: {
+      info: {
         name,
-          uid,
-          avatar,
+        uid,
+        avatar,
       }
     }
   },
