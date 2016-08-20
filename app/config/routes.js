@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import { Router, Route, IndexRoute } from 'react-router'
 import {
   MainContainer,
   HomeContainer,
@@ -11,9 +11,9 @@ import {
   DuckDetailsContainer
 } from 'containers'
 
-export default function getRoutes (checkAuth) {
+export default function getRoutes (checkAuth, history) {
   return (
-    <Router history={hashHistory}>
+    <Router history={history}>
       <Router path='/' component={MainContainer}>
         <IndexRoute component={HomeContainer} onEnter={checkAuth} />
         <Route path='greet' component={GreetContainer} />
