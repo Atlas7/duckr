@@ -1,18 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import getRoutes from './config/routes'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import { routerReducer, syncHistoryWithStore } from 'react-router-redux'
+import { hashHistory } from 'react-router'
+
+import getRoutes from './config/routes'
 import { checkIfAuthed } from 'helpers/auth'
 import * as reducers from 'redux/modules'
 
-const store = createStore(combineReducers(reducers), compose(
-  applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : (f) => f
-))
+const store = createStore(combineReducers(
+  {...reducers, routing: routerReducer}),
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : (f) => f
+  )
+)
 
-function checkAuth (nextState, replace) {
+const history = syncHistoryWithStore(hashHistory, store)
+
+  function checkAuth (nextState, replace) {
   if (store.getState().users.isFetching === true) {
     return
   }
@@ -31,7 +39,7 @@ function checkAuth (nextState, replace) {
 
 ReactDOM.render(
   <Provider store={store}>
-    {getRoutes(checkAuth)}
+    {getRoutes(checkAuth, history)}
   </Provider>,
   document.getElementById('app')
 )
