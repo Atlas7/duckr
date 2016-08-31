@@ -27,7 +27,7 @@ let reduxSchema = {
 
   //modal
   modal: {
-    duck,
+    duckText,
     isOpen,
   },
 
